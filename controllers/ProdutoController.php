@@ -7,11 +7,11 @@ class ProdutoController{
         // entrada  
         $nome = $_POST['nome'];
         $quantidade = $_POST['quantidade'];
-        $preco = $_POST['preco'];
         $investimento = $_POST['investimento'];
+        $preco = $_POST['preco'];
       
         
-        $produto = new Produto(null, $nome, $quantidade, $preco, $investimento);
+        $produto = new Produto(null, $nome, $quantidade, $investimento, $preco);
         $id = $produto->create();
 
         // saida
@@ -19,8 +19,8 @@ class ProdutoController{
         $result['produto']['id'] = $id;
         $result['produto']['nome'] = $nome;
         $result['produto']['quantidade'] = $quantidade;
-        $result['produto']['preco'] = $preco;
         $result['produto']['investimento'] = $investimento;
+        $result['produto']['preco'] = $preco;
         $response->out($result);
     }
   
@@ -44,17 +44,17 @@ class ProdutoController{
         $id = $_POST['id'];
         $nome = $_POST['nome'];
         $quantidade = $_POST['quantidade'];
-        $preco = $_POST['preco'];
         $investimento = $_POST['investimento'];
+        $preco = $_POST['preco'];
 
-        $produto = new Produto($id,$nome,$quantidade,$preco,$investimento);
+        $produto = new Produto($id,$nome,$quantidade,$investimento, $preco);
         $produto->update();
         $result['message'] = "Produto editado com Sucesso";
         $result['produto']['id'] = $id;
         $result['produto']['nome'] = $nome;
         $result['produto']['quantidade'] = $quantidade;
-        $result['produto']['preco'] = $preco;
         $result['produto']['investimento'] = $investimento;
+        $result['produto']['preco'] = $preco;
 
         $response->out($result);
     }

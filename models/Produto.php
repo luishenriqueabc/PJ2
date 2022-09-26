@@ -4,16 +4,16 @@ class Produto{
     public $id;
     public $nome;
     public $quantidade;
-    public $preco;
     public $investimento;
+    public $preco;
    
     
-    function __construct($id, $nome, $quantidade,$preco,$investimento) {
+    function __construct($id, $nome, $quantidade,$investimento, $preco) {
         $this->id = $id;
         $this->nome = $nome;
         $this->quantidade = $quantidade;
         $this->preco = $preco;
-        $this->investimento = $preco;
+        $this->investimento = $investimento;
     }
     
     function create(){

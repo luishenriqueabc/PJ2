@@ -1,5 +1,5 @@
 <?php
-define('BASE_URL_API', "/PJ1/api/");
+define('BASE_URL_API', "/pj2/api/");
 // DATABe config
 define('DB_HOST', "localhost");
 define('DB_NAME', "projeto");
