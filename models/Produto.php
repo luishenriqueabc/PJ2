@@ -4,27 +4,30 @@ class Produto{
     public $id;
     public $nome;
     public $quantidade;
-    public $investimento;
     public $preco;
+    public $investimento;
+    public $lucro;
    
     
-    function __construct($id, $nome, $quantidade,$investimento, $preco) {
+    function __construct($id, $nome, $quantidade,$investimento, $preco,$lucro) {
         $this->id = $id;
         $this->nome = $nome;
         $this->quantidade = $quantidade;
         $this->preco = $preco;
         $this->investimento = $investimento;
+        $this->lucro = $lucro;
     }
     
     function create(){
         $db = new Database();
         try{
-            $stmt = $db->conn->prepare("INSERT INTO produto (nome, quantidade, preco, investimento)
-            VALUES (:nome, :quantidade, :preco, :investimento)");
+            $stmt = $db->conn->prepare("INSERT INTO produto (nome, quantidade, preco, investimento,lucro)
+            VALUES (:nome, :quantidade, :preco, :investimento,:lucro)");
             $stmt->bindParam(':nome' , $this->nome);
             $stmt->bindParam(':quantidade' , $this->quantidade);
             $stmt->bindParam(':preco' , $this->preco);
             $stmt->bindParam(':investimento' , $this->investimento);
+            $stmt->bindParam(':lucro' , $this->lucro);
             $stmt->execute();
             $id = $db->conn->lastInsertId();
 
@@ -52,25 +55,6 @@ class Produto{
         }
     }
     
-    function update(){
-        $db = new Database();
-        try{
-            $stmt = $db->conn->prepare("UPDATE produto SET nome = :nome, quantidade=:quantidade, preco=:preco, investimento=:investimento WHERE id= :id");
-            $stmt->bindParam(':id' , $this->id);
-            $stmt->bindParam(':nome' , $this->nome);
-            $stmt->bindParam(':quantidade' , $this->quantidade);
-            $stmt->bindParam(':preco' , $this->preco);
-            $stmt->bindParam(':investimento' , $this->investimento);
-            $stmt->execute();
-            return true;
-        }
-        catch(PDOException $e){
-            $result['message'] = "Erro de update." .$e-> getMessage();
-            $response = new Output();
-            $response->out($result, 500);
-        }
-    }
-       
     function selectAll(){
         $db = new Database();
         try{
@@ -83,20 +67,6 @@ class Produto{
             $result['message'] = "404 - Rota api não encontrada." .$e-> getMessage();
             $response = new Output();
             $response->out($result, 404);
-        }
-    }
-    function selectById(){
-        $db = new Database();
-        try{
-            $stmt = $db->conn->prepare("SELECT * FROM produto WHERE id = :id;");
-            $stmt->bindParam(':id', $this->id);
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
-        }catch(PDOException $e){
-            $result['message'] = "Error - SelectById: " .$e-> getMessage();
-            $response = new Output();
-            $response->out($result, 500);
         }
     }
 }
