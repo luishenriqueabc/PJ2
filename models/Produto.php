@@ -7,27 +7,30 @@ class Produto{
     public $preco;
     public $investimento;
     public $lucro;
+    public $valortotal;
    
     
-    function __construct($id, $nome, $quantidade,$investimento, $preco,$lucro) {
+    function __construct($id, $nome, $quantidade,$investimento, $preco,$lucro,$valortotal) {
         $this->id = $id;
         $this->nome = $nome;
         $this->quantidade = $quantidade;
         $this->preco = $preco;
         $this->investimento = $investimento;
         $this->lucro = $lucro;
+        $this->valortotal = $valortotal;
     }
     
     function create(){
         $db = new Database();
         try{
-            $stmt = $db->conn->prepare("INSERT INTO produto (nome, quantidade, preco, investimento,lucro)
-            VALUES (:nome, :quantidade, :preco, :investimento,:lucro)");
+            $stmt = $db->conn->prepare("INSERT INTO produto (nome, quantidade, preco, investimento,valortotal,lucro)
+            VALUES (:nome, :quantidade, :preco, :investimento,:valortotal,:lucro)");
             $stmt->bindParam(':nome' , $this->nome);
             $stmt->bindParam(':quantidade' , $this->quantidade);
             $stmt->bindParam(':preco' , $this->preco);
             $stmt->bindParam(':investimento' , $this->investimento);
             $stmt->bindParam(':lucro' , $this->lucro);
+            $stmt->bindParam(':valortotal' , $this->valortotal);
             $stmt->execute();
             $id = $db->conn->lastInsertId();
 

@@ -10,9 +10,10 @@ class ProdutoController{
         $investimento = $_POST['investimento'];
         $preco = $_POST['preco'];
         $lucro = $_POST['lucro'];
+        $valortotal = $_POST['valortotal'];
       
         
-        $produto = new Produto(null, $nome, $quantidade, $investimento, $preco,$lucro);
+        $produto = new Produto(null, $nome, $quantidade, $investimento,$preco,$lucro,$valortotal);
         $id = $produto->create();
 
         // saida
@@ -23,6 +24,7 @@ class ProdutoController{
         $result['produto']['investimento'] = $investimento;
         $result['produto']['preco'] = $preco;
         $result['produto']['lucro'] = $lucro;
+        $result['produto']['valortotal'] = $valortotal;
         $response->out($result);
     }
   
@@ -31,7 +33,7 @@ class ProdutoController{
         $response->allowedMethod('POST'); 
 
         $id = $_POST['id'];
-        $produto= new Produto ($id,null,null,null,null,null);
+        $produto= new Produto ($id,null,null,null,null,null,null);
         $produto->delete();
         $result['message'] = "Produto deletado com sucesso";
         $result['produto']['id'] = $id;
@@ -41,7 +43,7 @@ class ProdutoController{
         $response = new Output();
         $response->allowedMethod('GET');
 
-        $produto= new Produto(null,null,null,null,null,null);
+        $produto= new Produto(null,null,null,null,null,null,null);
         $result = $produto->selectAll();
         $response->out($result);
 
