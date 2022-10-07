@@ -1,1 +1,3 @@
-SIstema de Lucros criado por Luis Henrique.
+Sistema de Lucros criado por Luis Henrique.
+
+Back-End  : PHP
