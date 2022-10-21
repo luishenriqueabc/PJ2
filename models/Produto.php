@@ -73,20 +73,20 @@ class Produto{
         }
     }
 
-    // function selectlucro(){
-    //     $db = new Database();
-    //     try{
-    //         $stmt = $db->conn->prepare("SELECT lucro FROM produto ");
-    //         $stmt->execute();
-    //         $result = $stmt->fetchAll (PDO::FETCH_ASSOC);
-    //         return $result;
-    //     }
-    //     catch(PDOException $e){
-    //         $result['message'] = "404 - Rota api não encontrada." .$e-> getMessage();
-    //         $response = new Output();
-    //         $response->out($result, 404);
-    //     }
-    // }
+    function selectlucro(){
+        $db = new Database();
+        try{
+            $stmt = $db->conn->prepare("SELECT lucro FROM produto ");
+            $stmt->execute();
+            $result = $stmt->fetchAll (PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e){
+            $result['message'] = "404 - Rota api não encontrada." .$e-> getMessage();
+            $response = new Output();
+            $response->out($result, 404);
+        }
+    }
 }
 
 ?>

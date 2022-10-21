@@ -47,14 +47,14 @@ class ProdutoController{
         $result = $produto->selectAll();
         $response->out($result);
     }
-    // function selectlucro(){
-    //     $response = new Output();
-    //     $response->allowedMethod('GET');
+    function selectlucro(){
+        $response = new Output();
+        $response->allowedMethod('GET');
 
-    //     $produto= new Produto(null,null,null,null,null,null,null);
-    //     $result = $produto->selectlucro();
-    //     $response->out($result);
+        $produto= new Produto(null,null,null,null,null,null,null);
+        $result = $produto->selectlucro();
+        $response->out($result);
 
-    // }
+    }
 }
 ?>
