@@ -47,12 +47,23 @@ class ProdutoController{
         $result = $produto->selectAll();
         $response->out($result);
     }
+    function selectById(){
+        $response = new Output();
+        $response->allowedMethod('GET');
+        $id = $_GET['id'];
+        $produto = new Produto ($id,null,null,null,null,null);
+        $result = $produto->selectById();
+
+        $response->out($result);
+
+    }
     function selectlucro(){
         $response = new Output();
         $response->allowedMethod('GET');
 
         $produto= new Produto(null,null,null,null,null,null,null);
         $result = $produto->selectlucro();
+
         $response->out($result);
 
     }

@@ -72,6 +72,20 @@ class Produto{
             $response->out($result, 404);
         }
     }
+    function selectById(){
+        $db = new Database();
+        try{
+            $stmt = $db->conn->prepare("SELECT * FROM figure WHERE id = :id;");
+            $stmt->bindParam(':id', $this->id);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }catch(PDOException $e){
+            $result['message'] = "Error - SelectById: " .$e-> getMessage();
+            $response = new Output();
+            $response->out($result, 500);
+        }
+    }
 
     function selectlucro(){
         $db = new Database();
