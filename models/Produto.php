@@ -60,12 +60,14 @@ class Produto{
     function update(){
         $db = new Database();
         try{
-            $stmt = $db->conn->prepare("UPDATE produto SET nome = :nome, quantidade=:quantidade, preco=:preco , investimento=:investimento WHERE id= :id");
+            $stmt = $db->conn->prepare("UPDATE produto SET nome=:nome, quantidade=:quantidade, preco=:preco, investimento=:investimento, valortotal=:valortotal, lucro=:lucro WHERE id=:id");
             $stmt->bindParam(':id' , $this->id);
             $stmt->bindParam(':nome' , $this->nome);
             $stmt->bindParam(':quantidade' , $this->quantidade);
             $stmt->bindParam(':preco' , $this->preco);
             $stmt->bindParam(':investimento' , $this->investimento);
+            $stmt->bindParam(':valortotal' , $this->valortotal);
+            $stmt->bindParam(':lucro' , $this->lucro);
             $stmt->execute();
             return true;
         }
@@ -90,10 +92,10 @@ class Produto{
             $response->out($result, 404);
         }
     }
-    function selectbyid(){
+    function selectById(){
         $db = new Database();
         try{
-            $stmt = $db->conn->prepare("SELECT * FROM figure WHERE id = :id;");
+            $stmt = $db->conn->prepare("SELECT * FROM produto WHERE id = :id;");
             $stmt->bindParam(':id', $this->id);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);

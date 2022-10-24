@@ -48,8 +48,10 @@ class ProdutoController{
         $quantidade = $_POST['quantidade'];
         $preco = $_POST['preco'];
         $investimento = $_POST['investimento'];
+        $valortotal = $_POST['valortotal'];
+        $lucro = $_POST['lucro'];
     
-        $produto = new produto($id, $nome, $quantidade, $preco, $investimento);
+        $produto = new produto($id, $nome, $quantidade, $preco, $investimento,$valortotal,$lucro);
         $produto->update();
         $result['message'] = "nome editado feito com Sucesso";
         $result['produto']['id'] = $id;
@@ -57,6 +59,8 @@ class ProdutoController{
         $result['produto']['quantidade'] = $quantidade;
         $result['produto']['preco'] = $preco;
         $result['produto']['investimento'] = $investimento;
+        $result['produto']['valortotal'] = $valortotal;
+        $result['produto']['lucro'] = $lucro;
         $response->out($result);
     }
     function selectAll(){
@@ -71,7 +75,7 @@ class ProdutoController{
         $response = new Output();
         $response->allowedMethod('GET');
         $id = $_GET['id'];
-        $produto = new Produto ($id,null,null,null,null,null);
+        $produto = new Produto ($id,null,null,null,null,null,null);
         $result = $produto->selectById();
         $response->out($result);
 
