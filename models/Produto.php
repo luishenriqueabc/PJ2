@@ -57,6 +57,24 @@ class Produto{
             $response->out($result, 500);
         }
     }
+    function update(){
+        $db = new Database();
+        try{
+            $stmt = $db->conn->prepare("UPDATE produto SET nome = :nome, quantidade=:quantidade, preco=:preco , investimento=:investimento WHERE id= :id");
+            $stmt->bindParam(':id' , $this->id);
+            $stmt->bindParam(':nome' , $this->nome);
+            $stmt->bindParam(':quantidade' , $this->quantidade);
+            $stmt->bindParam(':preco' , $this->preco);
+            $stmt->bindParam(':investimento' , $this->investimento);
+            $stmt->execute();
+            return true;
+        }
+        catch(PDOException $e){
+            $result['message'] = "Erro de update." .$e-> getMessage();
+            $response = new Output();
+            $response->out($result, 500);
+        }
+    }
     
     function selectAll(){
         $db = new Database();
@@ -72,7 +90,7 @@ class Produto{
             $response->out($result, 404);
         }
     }
-    function selectById(){
+    function selectbyid(){
         $db = new Database();
         try{
             $stmt = $db->conn->prepare("SELECT * FROM figure WHERE id = :id;");
